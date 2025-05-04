@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { router as imageRoutes } from './routes/imageRoutes.js';
 import { router as authRoutes } from './routes/authRoutes.js';
 import { requiresAuth } from './middleware/requiresAuthMiddleware.js';
+import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
 
 
   // Init the Express application
@@ -13,7 +13,7 @@ import { requiresAuth } from './middleware/requiresAuthMiddleware.js';
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
-  app.use("/auth", authRoutes)
+  app.use("/auth", authRoutes);
 
   // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
   // GET /filteredimage?image_url={{URL}}
@@ -31,7 +31,24 @@ import { requiresAuth } from './middleware/requiresAuthMiddleware.js';
 
     /**************************************************************************** */
 
-  app.use("/", requiresAuth(), imageRoutes);
+  app.get("/filteredImage", requiresAuth(), async (req, res) => {
+      let { image_url } = req.query;
+      if (!image_url) {
+          res.status(400).send("Required query parameter image_url is missing");
+          return;
+      }
+  
+      filterImageFromURL(image_url)
+          .then(filteredpath => {
+              res.status(200).sendFile(filteredpath, () => {
+                  deleteLocalFiles([filteredpath])
+              });
+          })
+          .catch(error => {
+              res.status(422).send("Unable to process image: " + error.message);
+          })
+      }
+  );
 
   //! END @TODO1
   
