@@ -15,7 +15,7 @@ curl --location http://full-stack-apps-aws-dev.us-east-1.elasticbeanstalk.com/au
     }'
 
 curl --location http://full-stack-apps-aws-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg --output kitten.jpg \
-    --header 'Authorization: Bearer <token>'
+    --header 'Authorization: Bearer \<token\>'
 
 curl --location http://full-stack-apps-aws-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://onlinejpgtools.com/images/examples-onlinejpgtools/sunflower.jpg --output sunflower.jpg \
     --header 'Authorization: Bearer  <token>'
@@ -30,7 +30,7 @@ curl --location http://localhost:8082/auth/token \
     }'
 
 curl --location http://localhost:8082/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg --output kitten.jpg \
-    --header 'Authorization: Bearer  <token>'
+    --header 'Authorization: Bearer  \<token\>'
 
 curl --location http://localhost:8082/filteredimage?image_url=https://onlinejpgtools.com/images/examples-onlinejpgtools/sunflower.jpg --output sunflower.jpg \
-    --header 'Authorization: Bearer  <token>'
+    --header 'Authorization: Bearer  \<token>\'
