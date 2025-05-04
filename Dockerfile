@@ -15,8 +15,8 @@ RUN apk add --no-cache openssl
 
 ENV DATABASE_URL postgresql://postgres:password@tweetsdb.cmnsv8uctklj.us-east-1.rds.amazonaws.com:5432/tweetsdb?schema=public
 ENV AWS_REGION us-east-1
-ENV ACCESS_TOKEN_EXPIRY 60m
-ENV REFRESH_TOKEN_EXPIRY 60m
+ENV ACCESS_TOKEN_EXPIRY 1440m
+ENV REFRESH_TOKEN_EXPIRY 1440m
 
 COPY . .
 EXPOSE 8082
